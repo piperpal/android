@@ -52,12 +52,12 @@ public class ItemDetailActivity extends AppCompatActivity {
 		public void onClick(View view) {
 		    // HTTPHandler sh = new HTTPHandler();
 		    // Context thisActivity = App.getContext();
-		    String url = "https://piperpal.com/market/";
+		    String url = "https://piperpal.com/service/" + getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
 		    // String result = sh.makeServiceCall(url, HTTPHandler.GET);
 		    Snackbar.make(view, url, Snackbar.LENGTH_LONG).setAction("Action", new View.OnClickListener() {
 			    @Override
 			    public void onClick(View view) {
-				String webpage = "https://piperpal.com/market/?category=" + ItemDetailFragment.ARG_ITEM_ID;
+				String webpage = "https://piperpal.com/service/" + getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW,
 								  Uri.parse(webpage));
 				startActivity(browserIntent);
