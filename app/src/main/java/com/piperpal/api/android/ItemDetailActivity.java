@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.piperpal.api.App;
+import com.piperpal.api.HTTPHandler;
 import com.piperpal.api.android.dummy.DummyContent;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,33 +45,29 @@ public class ItemDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HTTPHandler sh = new HTTPHandler();
                 Context thisActivity = App.getContext();
-                if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    Snackbar.make(view, "Mark your current geo with this tag", Snackbar.LENGTH_LONG)
+                String url = "https://piperpal.com/app/android"; // + mContentView.getText().toString();
+		String result = sh.makeServiceCall(url, HTTPHandler.GET);
+		if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+		    Snackbar.make(view, result + "/" + getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID), Snackbar.LENGTH_LONG);
+		} else {
+		    Snackbar.make(view, "Location Permission Denied", Snackbar.LENGTH_SHORT)
                             .setAction("Action", null).show();
-                } else {
-                    Snackbar.make(view, "Permission to geo denied", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            }
-        });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context thisActivity = App.getContext();
-                TextView mContentView = (TextView) view.findViewById(R.id.item_detail_container);
-                if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    Snackbar.make(view, "Mark your current geo with this tag", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                } else {
-                    Snackbar.make(view, "Permission to geo denied", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-                Snackbar.make(view, "Mark your current geo with " + mContentView.getText().toString(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+		}
+                // Making a request to url and getting response
+		// TextView mContentView = (TextView) view.findViewById(R.id.item_detail_container);
+                // if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                //     Snackbar.make(view, "https://piperpal.com/", Snackbar.LENGTH_LONG)
+                //             .setAction("Action", null).show();
+                // } else {
+                //     Snackbar.make(view, "Location Permission Denied", Snackbar.LENGTH_SHORT)
+                //             .setAction("Action", null).show();
+                // }
                 //Snackbar.make(view, "Mark your current geo with" + getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID.toString()), Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
                 // HttpURLConnection urlConnection = null;

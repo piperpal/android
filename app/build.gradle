@@ -12,10 +12,21 @@ android {
         versionCode 5
         versionName "1.1"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("/root/StudioProjects/android/piperpal-release-key.keystore")
+	    storePassword 'secret'
+            keyAlias 'alias_name'
+	    keyPassword 'secret'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+	    signingConfig signingConfigs.release
         }
     }
 }
