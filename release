@@ -1,5 +1,6 @@
 #scp apk/glass-release.apk piperpal@shell.domeneshop.no:www/apk/
 #scp apk/tv-release.apk piperpal@shell.domeneshop.no:www/apk/
 #scp apk/wear-release.apk piperpal@shell.domeneshop.no:www/apk/
-scp app/release/app-release.apk piperpal@shell.domeneshop.no:www/apk/app-release.apk
-scp app/release/app-release.apk piperpal@shell.domeneshop.no:www/apk/piperpal.apk
+./gradlew assembleRelease
+scp app/build/outputs/apk/release/app-release.apk piperpal@shell.domeneshop.no:www/apk/app-release.apk
+scp app/build/outputs/apk/release/app-release.apk piperpal@shell.domeneshop.no:www/apk/piperpal.apk
