@@ -1,15 +1,21 @@
 package com.piperpal.api.android;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.piperpal.api.App;
 import com.piperpal.api.android.dummy.DummyContent;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +33,6 @@ import java.net.URL;
  * in a {@link ItemListActivity}.
  */
 
-
 public class ItemDetailActivity extends AppCompatActivity {
 
     @Override
@@ -42,7 +47,29 @@ public class ItemDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Mark your current geo with " + getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID), Snackbar.LENGTH_LONG)
+                Context thisActivity = App.getContext();
+                if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    Snackbar.make(view, "Mark your current geo with this tag", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, "Permission to geo denied", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context thisActivity = App.getContext();
+                TextView mContentView = (TextView) view.findViewById(R.id.item_detail_container);
+                if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    Snackbar.make(view, "Mark your current geo with this tag", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, "Permission to geo denied", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                Snackbar.make(view, "Mark your current geo with " + mContentView.getText().toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 //Snackbar.make(view, "Mark your current geo with" + getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID.toString()), Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
