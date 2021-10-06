@@ -1,24 +1,24 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 30 
+    buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "com.piperpal.api.android"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 30 
         useLibrary 'org.apache.http.legacy'
-        versionCode 7
-        versionName "1.2"
+        versionCode 22 
+        versionName "3.0"
     }
 
     signingConfigs {
         release {
-            storeFile file("/root/StudioProjects/android/piperpal-release-key.keystore")
-	    storePassword 'secret'
+            storeFile file("/Users/oleaamot/android/piperpal-release-key.keystore")
+	    storePassword 'Google2020'
             keyAlias 'alias_name'
-	    keyPassword 'secret'
+	    keyPassword 'Google2020'
         }
     }
 
