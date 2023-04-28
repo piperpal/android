@@ -2,6 +2,7 @@ package com.piperpal.api.android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -44,12 +45,16 @@ public class ItemListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_list);
+        String webpage = "https://piperpal.com/";
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(webpage));
+        startActivity(browserIntent);
+        // setContentView(R.layout.activity_item_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+        // setSupportActionBar(toolbar);
+        // toolbar.setTitle(getTitle());
 
         // Acquire a reference to the system Location Manager
         // LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
