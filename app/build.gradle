@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion '32.0.0'
+    compileSdkVersion 34
+    buildToolsVersion '34.0.0'
 
     defaultConfig {
         applicationId "com.piperpal.api.android"
         minSdkVersion 19
-        targetSdkVersion 32
+        targetSdkVersion 34
         useLibrary 'org.apache.http.legacy'
-        versionCode 34
-        versionName "5.0"
+        versionCode 42
+        versionName "8.0"
     }
 
     signingConfigs {
